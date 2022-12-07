@@ -3,6 +3,10 @@
 //
 
 #include "dataSourcePrototype.h"
+
+#define LOG_TAG "dataSourcePrototype"
+
+#include <utils/frame_work_log.h>
 #include <utils/globalSettings.h>
 #ifdef ENABLE_CURL_SOURCE
 #include "curl/curl_data_source2.h"
@@ -19,6 +23,7 @@ int dataSourcePrototype::_nextSlot;
 void dataSourcePrototype::addPrototype(dataSourcePrototype *se)
 {
     dataSourceQueue[_nextSlot++] = se;
+    AF_LOGD("addPrototype:%s\n", typeid(*se).name());
 }
 
 Cicada::IDataSource *dataSourcePrototype::create(const std::string &uri, const Cicada::options *opts, int flags)

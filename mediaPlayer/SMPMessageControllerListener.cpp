@@ -4,6 +4,8 @@
 
 #include "SMPMessageControllerListener.h"
 
+#define LOG_TAG "smp_controller"
+
 #include "SuperMediaPlayer.h"
 #include "media_player_error_def.h"
 #include <cassert>

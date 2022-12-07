@@ -39,6 +39,7 @@ namespace Cicada {
 #if AF_HAVE_PTHREAD
         mPthread = NEW_AF_THREAD(readLoop);
 #endif
+        AF_LOGD("init avformat\n");
     }
 
     avFormatDemuxer::avFormatDemuxer()

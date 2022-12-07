@@ -305,7 +305,7 @@ void CurlDataSource::closeConnections(bool current)
 
 int64_t CurlDataSource::Seek(int64_t offset, int whence)
 {
-    //    CURL_LOGD("CurlDataSource::Seek position is %lld,when is %d", offset, whence);
+    CURL_LOGD("CurlDataSource::Seek position is %lld,when is %d", offset, whence);
     if (!mPConnection) {
         return -(ESPIPE);
     }
@@ -348,14 +348,13 @@ int64_t CurlDataSource::Seek(int64_t offset, int whence)
 
     //first seek in cache
     if (mPConnection->short_seek(offset) >= 0) {
-        AF_LOGI("short seek ok\n");
+        AF_LOGI("curr short seek ok\n");
         return offset;
     } else {
-        AF_LOGI("short seek failed\n");
+        AF_LOGI("curr short seek failed\n");
     }
 
     CURLConnection *con = nullptr;
-
 
     if (mNeedReconnect) {
         rangeStart = offset;
@@ -390,10 +389,10 @@ int64_t CurlDataSource::Seek(int64_t offset, int whence)
             });
         }
         mPConnection = con;
-        AF_LOGW("short seek ok\n");
+        AF_LOGW("change con short seek ok\n");
         return offset;
     } else {
-        AF_LOGW("short seek failed\n");
+        AF_LOGW("change con short seek failed\n");
     }
 
     int64_t ret = TrySeekByNewConnection(offset);

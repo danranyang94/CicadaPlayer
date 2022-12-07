@@ -3,6 +3,11 @@
 //
 
 #include "demuxerPrototype.h"
+
+#define LOG_TAG "demuxerPrototype"
+
+#include <utils/frame_work_log.h>
+
 #include <demuxer/avFormatDemuxer.h>
 #include <demuxer/avFormatSubtitleDemuxer.h>
 #include <demuxer/play_list/playList_demuxer.h>
@@ -16,6 +21,7 @@ int demuxerPrototype::_nextSlot;
 void demuxerPrototype::addPrototype(demuxerPrototype *se)
 {
     demuxerQueue[_nextSlot++] = se;
+    AF_LOGD("addPrototype:%s\n", typeid(*se).name());
 }
 
 IDemuxer *demuxerPrototype::create(const string &uri, const uint8_t *buffer, int64_t size, unique_ptr<Cicada::DemuxerMeta> meta,
